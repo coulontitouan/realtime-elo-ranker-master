@@ -1,0 +1,42 @@
+[
+    {
+        "id": "player1",
+        "rank": 1200
+    },
+    {
+        "id": "player2",
+        "rank": 1250
+    },
+    {
+        "id": "player3",
+        "rank": 1100
+    },
+    {
+        "id": "player4",
+        "rank": 1300
+    },
+    {
+        "id": "player5",
+        "rank": 1400
+    },
+    {
+        "id": "player6",
+        "rank": 1000
+    },
+    {
+        "id": "player7",
+        "rank": 1350
+    },
+    {
+        "id": "player8",
+        "rank": 1150
+    },
+    {
+        "id": "player9",
+        "rank": 1050
+    },
+    {
+        "id": "player10",
+        "rank": 1450
+    }
+]
