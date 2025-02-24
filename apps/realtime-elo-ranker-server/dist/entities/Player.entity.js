@@ -9,23 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
-const common_1 = require("@nestjs/common");
-const URL = '/api';
-let AppController = class AppController {
-    static URL = URL;
-    getHello() {
-        return 'Hello World!';
-    }
+exports.PlayerDB = void 0;
+const typeorm_1 = require("typeorm");
+let PlayerDB = class PlayerDB {
+    id;
+    rank;
 };
-exports.AppController = AppController;
+exports.PlayerDB = PlayerDB;
 __decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(URL)
-], AppController);
-//# sourceMappingURL=app.controller.js.map
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", String)
+], PlayerDB.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    __metadata("design:type", Number)
+], PlayerDB.prototype, "rank", void 0);
+exports.PlayerDB = PlayerDB = __decorate([
+    (0, typeorm_1.Entity)()
+], PlayerDB);
+//# sourceMappingURL=Player.entity.js.map

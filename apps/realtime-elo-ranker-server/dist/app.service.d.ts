@@ -1,19 +1,9 @@
-import { Player, MatchResult, PublishedMatch, Ranking, APIErrorCode, RankingUpdate, RankingUpdateEvent } from './app.types';
+import { RankingUpdate, RankingUpdateEvent } from './app.types';
 import { EventEmitter } from 'events';
-interface EventMap {
+export interface EventMap {
     [RankingUpdate]: RankingUpdateEvent[];
 }
-export declare class AppService {
-    private data;
-    private eventEmitter;
-    private readonly K;
-    private readonly ELO_DIVISOR;
-    constructor();
+export declare abstract class AppService {
+    protected eventEmitter: EventEmitter<EventMap>;
     getEventEmitter(): EventEmitter<EventMap>;
-    getRanking(): Ranking | APIErrorCode;
-    createPlayer(player: {
-        id: string;
-    }): Player | APIErrorCode;
-    createMatch(match: MatchResult): PublishedMatch | APIErrorCode;
 }
-export {};

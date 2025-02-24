@@ -3,15 +3,16 @@ export interface MatchResult {
     loser: string;
     draw: boolean;
 }
-export interface Player {
+export interface PlayerScratch {
     id: string;
+}
+export interface Player extends PlayerScratch {
     rank: number;
 }
 export interface PublishedMatch {
     winner: Player;
     loser: Player;
 }
-export type APIErrorCode = 400 | 404 | 409 | 422;
 export declare const RankingUpdate = "RankingUpdate";
 export interface RankingUpdateEvent {
     player: Player;
