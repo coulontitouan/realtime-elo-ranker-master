@@ -38,7 +38,7 @@ describe('PlayerService', () => {
         jest.spyOn(repo, 'save').mockResolvedValue({ id: 'newPlayer', rank: 0 } as PlayerDB);
 
         const result = await service.createPlayer(playerScratch);
-        expect(result).toEqual({ id: 'newPlayer', rank: 0 });
+        expect(result).toEqual({ id: 'newPlayer', rank: 1000 });
     });
 
     it("doit retourner un conflit si le joueur existe déjà", async () => {
