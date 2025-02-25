@@ -18,7 +18,7 @@ export class PlayerService extends AppService {
         const newPlayer = this.playerRepository.create({ id: player.id });
         await this.playerRepository.save(newPlayer);
         this.eventEmitter.emit(RankingUpdate, { player: newPlayer });
-        return { ...player, rank: 0 };
+        return { ...player, rank: 1000 };
     }
 
     async updatePlayer(player: Player): Promise<Player | HttpStatus.NOT_FOUND> {
