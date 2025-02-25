@@ -1,6 +1,6 @@
 import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
-import { AppController } from 'src/app.controller';
-import { MatchResult, PublishedMatch } from 'src/app.types';
+import { AppController } from '../app.controller';
+import { MatchResult, PublishedMatch } from '../app.types';
 import { MatchService } from './match.service';
 
 const URL = `${AppController.URL}/match`;

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MatchService = void 0;
 const common_1 = require("@nestjs/common");
+const event_emitter_1 = require("@nestjs/event-emitter");
 const app_service_1 = require("../app.service");
 const app_types_1 = require("../app.types");
 const player_service_1 = require("../player/player.service");
@@ -18,8 +19,8 @@ let MatchService = class MatchService extends app_service_1.AppService {
     playerService;
     K = 32;
     ELO_DIVISOR = 400;
-    constructor(playerService) {
-        super();
+    constructor(playerService, eventEmitter) {
+        super(eventEmitter);
         this.playerService = playerService;
     }
     async createMatch(match) {
@@ -51,6 +52,6 @@ let MatchService = class MatchService extends app_service_1.AppService {
 exports.MatchService = MatchService;
 exports.MatchService = MatchService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [player_service_1.PlayerService])
+    __metadata("design:paramtypes", [player_service_1.PlayerService, event_emitter_1.EventEmitter2])
 ], MatchService);
 //# sourceMappingURL=match.service.js.map

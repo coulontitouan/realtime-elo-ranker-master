@@ -1,15 +1,15 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { AppService } from 'src/app.service';
-import { MatchResult, PublishedMatch, RankingUpdate } from 'src/app.types';
-import { PlayerService } from 'src/player/player.service';
-import { RankingService } from 'src/ranking/ranking.service';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { AppService } from '../app.service';
+import { MatchResult, PublishedMatch, RankingUpdate } from '../app.types';
+import { PlayerService } from '../player/player.service';
 
 @Injectable()
 export class MatchService extends AppService {
     private readonly K = 32;
     private readonly ELO_DIVISOR = 400;
 
-    constructor(private playerService: PlayerService) { super() }
+    constructor(private playerService: PlayerService, eventEmitter: EventEmitter2) { super(eventEmitter) }
 
     async createMatch(match: MatchResult): Promise<PublishedMatch | HttpStatus.UNPROCESSABLE_ENTITY> {
         const winner = await this.playerService.getPlayer({ id: match.winner });

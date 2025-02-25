@@ -1,6 +1,6 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Observable } from 'rxjs';
-import { Ranking, RankingUpdateEvent } from 'src/app.types';
+import { Ranking } from '../app.types';
 import { RankingService } from './ranking.service';
 export declare class RankingController {
     private readonly rankingService;
@@ -12,5 +12,4 @@ export declare class RankingController {
     getRankingEvents(): Observable<{
         data: string;
     }>;
-    handleRankingUpdate(event: RankingUpdateEvent): void;
 }

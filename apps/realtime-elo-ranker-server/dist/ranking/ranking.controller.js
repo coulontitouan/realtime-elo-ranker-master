@@ -25,9 +25,8 @@ let RankingController = class RankingController {
     constructor(rankingService, eventEmitter) {
         this.rankingService = rankingService;
         this.eventEmitter = eventEmitter;
-        const serviceEmitter = this.rankingService.getEventEmitter();
-        serviceEmitter.on(app_types_1.RankingUpdate, (event) => {
-            this.eventEmitter.emit(app_types_1.RankingUpdate, event);
+        this.eventEmitter.on(app_types_1.RankingUpdate, (event) => {
+            this.rankingUpdates$.next(event);
         });
     }
     async getRanking() {
@@ -43,15 +42,9 @@ let RankingController = class RankingController {
         return this.rankingUpdates$.asObservable().pipe((0, rxjs_1.map)((data) => ({
             data: JSON.stringify({
                 type: app_types_1.RankingUpdate,
-                player: {
-                    id: data.player.id,
-                    rank: data.player.rank
-                }
+                player: data.player
             })
         })));
-    }
-    handleRankingUpdate(event) {
-        this.rankingUpdates$.next(event);
     }
 };
 exports.RankingController = RankingController;
@@ -67,12 +60,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", rxjs_1.Observable)
 ], RankingController.prototype, "getRankingEvents", null);
-__decorate([
-    (0, event_emitter_1.OnEvent)(app_types_1.RankingUpdate),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], RankingController.prototype, "handleRankingUpdate", null);
 exports.RankingController = RankingController = __decorate([
     (0, common_1.Controller)(URL),
     __metadata("design:paramtypes", [ranking_service_1.RankingService, event_emitter_1.EventEmitter2])

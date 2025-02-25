@@ -1,9 +1,8 @@
 import { Controller, Get, HttpException, HttpStatus, Sse } from '@nestjs/common';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Subject, Observable, map } from 'rxjs';
-import { AppService } from 'src/app.service';
-import { Ranking, RankingUpdate, RankingUpdateEvent } from 'src/app.types';
-import { AppController } from 'src/app.controller';
+import { Ranking, RankingUpdate, RankingUpdateEvent } from '../app.types';
+import { AppController } from '../app.controller';
 import { RankingService } from './ranking.service';
 
 const URL = `${AppController.URL}/ranking`;
@@ -15,10 +14,8 @@ export class RankingController {
     private rankingUpdates$ = new Subject<RankingUpdateEvent>();
 
     constructor(private readonly rankingService: RankingService, private eventEmitter: EventEmitter2) {
-        const serviceEmitter = this.rankingService.getEventEmitter();
-
-        serviceEmitter.on(RankingUpdate, (event: RankingUpdateEvent) => {
-            this.eventEmitter.emit(RankingUpdate, event);
+        this.eventEmitter.on(RankingUpdate, (event: RankingUpdateEvent) => {
+            this.rankingUpdates$.next(event);
         });
     }
 
@@ -39,16 +36,8 @@ export class RankingController {
             map((data) => ({
                 data: JSON.stringify({
                     type: RankingUpdate,
-                    player: {
-                        id: data.player.id,
-                        rank: data.player.rank
-                    }
+                    player: data.player
                 })
             })));
-    }
-
-    @OnEvent(RankingUpdate)
-    handleRankingUpdate(event: RankingUpdateEvent) {
-        this.rankingUpdates$.next(event);
     }
 }

@@ -42,6 +42,15 @@ let PlayerController = class PlayerController {
                 return res;
         }
     }
+    async deletePlayer(id) {
+        const res = await this.playerService.deletePlayer({ id });
+        switch (res) {
+            case common_1.HttpStatus.NOT_FOUND:
+                throw new common_1.HttpException("Le joueur n'existe pas", res);
+            default:
+                return res;
+        }
+    }
 };
 exports.PlayerController = PlayerController;
 __decorate([
@@ -58,6 +67,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PlayerController.prototype, "createPlayer", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], PlayerController.prototype, "deletePlayer", null);
 exports.PlayerController = PlayerController = __decorate([
     (0, common_1.Controller)(URL),
     __metadata("design:paramtypes", [player_service_1.PlayerService])

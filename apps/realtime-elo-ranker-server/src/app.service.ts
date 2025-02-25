@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RankingUpdate, RankingUpdateEvent } from './app.types';
-import { EventEmitter } from 'events';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 export interface EventMap {
     [RankingUpdate]: RankingUpdateEvent[];
@@ -8,7 +8,7 @@ export interface EventMap {
 
 @Injectable()
 export abstract class AppService {
-    protected eventEmitter = new EventEmitter<EventMap>();
+    constructor(protected eventEmitter: EventEmitter2) { }
 
     getEventEmitter() {
         return this.eventEmitter;

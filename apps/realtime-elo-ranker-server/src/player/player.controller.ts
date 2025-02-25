@@ -1,6 +1,6 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
-import { AppController } from 'src/app.controller';
-import { PlayerScratch, Player } from 'src/app.types';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { AppController } from '../app.controller';
+import { PlayerScratch, Player } from '../app.types';
 import { PlayerService } from './player.service';
 
 const URL = `${AppController.URL}/player`;
@@ -29,6 +29,17 @@ export class PlayerController {
                 throw new HttpException('Le joueur existe déjà', res);
             case HttpStatus.UNPROCESSABLE_ENTITY:
                 throw new HttpException("L'identifiant du joueur n'est pas valide", res);
+            default:
+                return res as Player;
+        }
+    }
+
+    @Delete(':id')
+    async deletePlayer(@Param('id') id: string): Promise<Player> {
+        const res = await this.playerService.deletePlayer({ id });
+        switch (res) {
+            case HttpStatus.NOT_FOUND:
+                throw new HttpException("Le joueur n'existe pas", res);
             default:
                 return res as Player;
         }

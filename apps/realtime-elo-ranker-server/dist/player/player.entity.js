@@ -27,4 +27,4 @@ __decorate([
 exports.PlayerDB = PlayerDB = __decorate([
     (0, typeorm_1.Entity)()
 ], PlayerDB);
-//# sourceMappingURL=Player.entity.js.map
+//# sourceMappingURL=player.entity.js.map

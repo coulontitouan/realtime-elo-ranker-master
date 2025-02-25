@@ -1,4 +1,4 @@
-import { MatchResult, PublishedMatch } from 'src/app.types';
+import { MatchResult, PublishedMatch } from '../app.types';
 import { MatchService } from './match.service';
 export declare class MatchController {
     private matchService;
